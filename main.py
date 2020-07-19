@@ -1,3 +1,12 @@
+# Written by Tisboyo - 10230718+tisboyo@users.noreply.github.com
+
+# Used for interacting with the PiSugar2 from
+# https://www.tindie.com/products/pisugar/pisugar2-battery-for-raspberry-pi-zero/
+# Does require installing the PiSugar-Power-Manager software per PiSugars instructions
+
+# This library connects over tcp using a netcat like interaction
+# and supports all of the currently published commands.
+
 from __future__ import annotations
 import socket
 from collections import namedtuple
