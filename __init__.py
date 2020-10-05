@@ -231,6 +231,21 @@ class PiSugar2:
         output = self.netcat.query("get safe_shutdown_level")
         return self._nt(output)
 
+    def get_battery_allow_charging(self) -> namedtuple:
+        """Returns whether the charging usb is plugged (new model only)"""
+        output = self.netcat.query("get battery_allow_charging")
+        return self._nt(output)
+
+    def get_battery_power_plugged(self) -> namedtuple:
+        """Returns whether the charging usb is plugged (new model only)"""
+        output = self.netcat.query("get battery_power_plugged")
+        return self._nt(output)
+
+    def get_battery_led_amount(self) -> namedtuple:
+        """Returns the charging indicate led amount, 4 for old model, 2 for new model"""
+        output = self.netcat.query("get battery_led_amount")
+        return self._nt(output)
+
     def get_safe_shutdown_delay(self) -> namedtuple:
         """Returns the safe shutdown delay in seconds"""
         output = self.netcat.query("get safe_shutdown_delay")
