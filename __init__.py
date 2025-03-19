@@ -14,20 +14,17 @@ from datetime import datetime
 
 
 class Netcat:
-
-    """ Python 'netcat like' module """
+    """Python 'netcat like' module"""
 
     # Graciously borrowed from https://gist.github.com/leonjza/f35a7252babdf77c8421
 
     def __init__(self, ip: str, port: int):
-
         self.buff = ""
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.socket.connect((ip, port))
 
     def read(self, length: int = 1024) -> str:
-
-        """ Read 1024 bytes off the socket """
+        """Read 1024 bytes off the socket"""
 
         # Decode the returned byte string to a string and strip trailing whitespace
         return self.socket.recv(length).decode("UTF-8").rstrip()
@@ -47,12 +44,10 @@ class Netcat:
     #     return rval
 
     def write(self, data: str) -> None:
-
         data = data.encode("UTF-8")
         self.socket.send(data)
 
     def close(self) -> None:
-
         self.socket.close()
 
     def query(self, data: str) -> str:
@@ -92,7 +87,9 @@ class PiSugar2:
 
         # Check to make sure the request was valid
         if output == "Invalid request.":
-            raise InvalidRequest
+            raise InvalidRequest(
+                "Confirm your device is running the PiSugar-Power-Manager software and is turned on."
+            )
 
         # Split the values received into name and value
         tup = tuple(output.split(": ", 1))
@@ -308,7 +305,6 @@ class PiSugar2:
         """
 
         if press.lower() in ["single", "double", "long"]:
-
             output = self.netcat.query(f"set_button_enable {press} {int(enable)}")
             return self._nt(output)
 
